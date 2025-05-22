@@ -1,7 +1,7 @@
 # Gossip Girl Viewership Report
 
 This project contains a short report analyzing viewership data for the TV show *Gossip Girl*.
-*University of Warsaw, Faculty of Economic Sciences*
+**University of Warsaw, Faculty of Economic Sciences**
 
 ## Files
 
