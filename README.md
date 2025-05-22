@@ -1,6 +1,7 @@
 # Gossip Girl Viewership Report
 
 This project contains a short report analyzing viewership data for the TV show *Gossip Girl*.
+*University of Warsaw, Faculty of Economic Sciences*
 
 ## Files
 
@@ -13,4 +14,4 @@ This project contains a short report analyzing viewership data for the TV show *
 
 **Eliza Hałatek**  
 Date: 22 May 2025
-University of Warsaw, Faculty of Economic Sciences
+
