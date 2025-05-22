@@ -1,0 +1,99 @@
+---
+title: "Gossip Girl Viewership Report"
+author: "Eliza Hałatek"
+date: "22 May 2025"
+output: html_document
+---
+
+# *Gossip Girl* — TV Series Analysis
+
+*Gossip Girl* is an American teen drama television series that aired on **The CW** from **2007 to 2012**. The series became iconic for its **glamorous** portrayal of life on Manhattan’s Upper East Side and had a significant pop culture impact. Personally - one of my favorite TV series :-)
+
+**Genres**: *Drama, Teen, Romance*  
+**Network**: *The CW*
+
+![Source: Gossip Girl, retrieved form Prime Video, 2025](gossipgirl.jpg)
+
+---
+
+## Viewership Data
+
+The table below summarizes the **average US viewership (in millions)** by season, based on data from the [Wikipedia](https://en.wikipedia.org/wiki/List_of_Gossip_Girl_episodes).
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Viewership data by season
+gossip_data <- data.frame(
+  Season = 1:6,
+  Viewership = c(2.48, 2.81, 2.02, 1.67, 1.39, 1.27)  # in millions
+)
+```
+
+---
+
+##  Summary Statistics
+
+```{r}
+summary_stats <- gossip_data %>%
+  summarise(
+    Mean = round(mean(Viewership), 2),
+    Max = max(Viewership),
+    Min = min(Viewership),
+    Season_Max = Season[which.max(Viewership)],
+    Season_Min = Season[which.min(Viewership)]
+  )
+
+summary_stats
+
+```
+
+---
+
+## Viewership Trend by Season
+
+```{r}
+ggplot(gossip_data, aes(x = Season, y = Viewership)) +
+  geom_line(color = "chocolate4", linewidth = 1.2) +
+  geom_point(size = 3, color = "yellow4") +
+  labs(
+    title = "Average Viewership per Season",
+    x = "Season",
+    y = "Viewers (Millions)"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## Season-to-Season Change
+
+```{r}
+gossip_data <- gossip_data %>%
+  mutate(Change = c(NA, round(diff(Viewership), 2)))
+
+ggplot(gossip_data[-1, ], aes(x = factor(Season), y = Change)) +
+  geom_col(fill = "chocolate4") +
+  labs(
+    title = "Viewership Change Between Seasons",
+    x = "Season",
+    y = "Change in Viewership (Millions)"
+  ) +
+  theme_minimal()
+```
+
+---
+
+## Observations
+
+- The show peaked in **Season `r summary_stats$Season_Max`** with **`r summary_stats$Max`** million viewers on average.
+- By **Season `r summary_stats$Season_Min`**, viewership had declined to **`r summary_stats$Min`** million.
+- Notably, viewership dropped by **`r abs(gossip_data$Change[3])`** million between **Season 2 and 3**, which marked a key downturn.
+
+---
+
+## Data Source
+
+Wikipedia: [List of Gossip Girl episodes](https://en.wikipedia.org/wiki/List_of_Gossip_Girl_episodes)
